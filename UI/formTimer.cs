@@ -12,6 +12,8 @@ namespace CapoeiraTimer.UI
         private bool _isRunning = false;
         private bool _isStopped = false;
         private TimeSpan _time = new TimeSpan();
+        private Tuple<string, Color> _playerOne;
+        private Tuple<string, Color> _playerTwo;
 
         #endregion
 
@@ -48,17 +50,15 @@ namespace CapoeiraTimer.UI
             Reset();
         }
 
-        protected override void OnKeyDown( KeyEventArgs e )
+        private void formTimer_KeyPress( object sender, KeyPressEventArgs e )
         {
-            if ( e.KeyCode == Keys.Enter )
+            if ( ( Keys ) e.KeyChar == Keys.Space )
                 btnStop.PerformClick();
-            else if ( e.KeyCode == Keys.Escape )
+            else if ( ( Keys ) e.KeyChar == Keys.Escape )
             {
                 if ( btnReset.Enabled )
                     Reset();
             }
-
-            base.OnKeyDown( e );
         }
 
         #endregion
@@ -73,9 +73,12 @@ namespace CapoeiraTimer.UI
             lblTimer.ForeColor = Color.Black;
             lblTimer.Text = "00:00";
             btnReset.Enabled = true;
-            btnStop.Text = "Iniciar (Enter)";
+            btnStop.Text = "Iniciar (Espaço)";
+            btnStop.Image = imageList1.Images["ico_play.png"];
             _isStopped = false;
             timer1.Enabled = false;
+            lblNameTwo.Text = lblNameOne.Text = "...";
+            lblNameTwo.ForeColor = lblNameOne.ForeColor = Color.Black;
         }
 
         /// <summary>
@@ -87,7 +90,8 @@ namespace CapoeiraTimer.UI
             _isStopped = true;
             btnReset.Enabled = true;
             timer1.Enabled = false;
-            btnStop.Text = "Continuar (Enter)";
+            btnStop.Text = "Continuar (Espaço)";
+            btnStop.Image = imageList1.Images["ico_play.png"];
         }
 
         /// <summary>
@@ -102,12 +106,22 @@ namespace CapoeiraTimer.UI
                 if ( oConfig.ShowDialog() == DialogResult.OK )
                 {
                     _time = TimeSpan.FromSeconds( oConfig.TotalSeconds );
-                    lblNameOne.Text = oConfig.NameOne;
-                    lblNameTwo.Text = oConfig.NameTwo;
+
+                    lblNameOne.Text = oConfig.PlayerOne.Item1;
+                    lblNameOne.ForeColor = oConfig.PlayerOne.Item2;
+
+                    _playerOne = oConfig.PlayerOne;
+
+                    lblNameTwo.Text = oConfig.PlayerTwo.Item1;
+                    lblNameTwo.ForeColor = oConfig.PlayerTwo.Item2;
+
+                    _playerTwo = oConfig.PlayerTwo;
+
                     _isRunning = true;
                     btnReset.Enabled = false;
                     timer1.Enabled = true;
-                    btnStop.Text = "Parar (Enter)";
+                    btnStop.Text = "Parar (Espaço)";
+                    btnStop.Image = imageList1.Images["ico_stop.png"];
                 }
             }
             else
@@ -116,7 +130,8 @@ namespace CapoeiraTimer.UI
                 _isStopped = false;
                 btnReset.Enabled = false;
                 timer1.Enabled = true;
-                btnStop.Text = "Parar (Enter)";
+                btnStop.Text = "Parar (Espaço)";
+                btnStop.Image = imageList1.Images["ico_stop.png"];
             }
         }
 
@@ -141,14 +156,23 @@ namespace CapoeiraTimer.UI
                     lblTimer.ForeColor = Color.Blue;
                     lblTimer.Text = " Fim!";
                     btnReset.Enabled = true;
+                    timer1.Enabled = false;
+                    btnStop.Text = "Iniciar (Espaço)";
+                    btnStop.Image = imageList1.Images["ico_play.png"];
+                    GetWinner();
                 }
             }
         }
 
-
+        /// <summary>
+        /// Get the winner
+        /// </summary>
+        private void GetWinner()
+        {
+            frmWinner oFrmWinner = new frmWinner( _playerOne, _playerTwo );
+            oFrmWinner.ShowDialog();
+        }
 
         #endregion
-
-        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
@@ -7,6 +8,9 @@ namespace CapoeiraTimer.UI
     public partial class formConfig : Form
     {
         #region [Properties]
+
+        private Tuple<string, Color> _playerOne = null;
+        private Tuple<string, Color> _playerTwo = null;
 
         /// <summary>
         /// Return the total of seconds
@@ -17,19 +21,27 @@ namespace CapoeiraTimer.UI
         }
 
         /// <summary>
-        /// Name One
+        /// Player One
         /// </summary>
-        public string NameOne
+        public Tuple<string, Color> PlayerOne
         {
-            get { return txtNameOne.Text; }
+            get
+            {
+                _playerOne = new Tuple<string, Color>( txtNameOne.Text, btnColorNameOne.BackColor );
+                return _playerOne;
+            }
         }
 
         /// <summary>
-        /// Name Two
+        /// Player Two
         /// </summary>
-        public string NameTwo
+        public Tuple<string, Color> PlayerTwo
         {
-            get { return txtNameTwo.Text; }
+            get
+            {
+                _playerTwo = new Tuple<string, Color>( txtNameTwo.Text, btnColorNameTwo.BackColor );
+                return _playerTwo;
+            }
         }
 
         #endregion
@@ -67,6 +79,16 @@ namespace CapoeiraTimer.UI
             Close();
         }
 
+        private void btnColorNameOne_Click( object sender, EventArgs e )
+        {
+            btnColorNameOne.BackColor = GetColor();
+        }
+
+        private void btnColorNameTwo_Click( object sender, EventArgs e )
+        {
+            btnColorNameTwo.BackColor = GetColor();
+        }
+
         #endregion
 
         #region [Methods]
@@ -88,6 +110,20 @@ namespace CapoeiraTimer.UI
 
             return _message.ToString();
         }
+
+        /// <summary>
+        /// Get the color for the name
+        /// </summary>
+        /// <returns></returns>
+        private Color GetColor()
+        {
+            if ( colorDialog1.ShowDialog() == DialogResult.OK )
+                return colorDialog1.Color;
+
+            return Color.Black;
+        }
+
+
 
         #endregion
 
