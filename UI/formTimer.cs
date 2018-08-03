@@ -78,7 +78,7 @@ namespace CapoeiraTimer.UI
             _isStopped = false;
             timer1.Enabled = false;
             lblNameTwo.Text = lblNameOne.Text = "...";
-            lblNameTwo.ForeColor = lblNameOne.ForeColor = Color.Black;
+            lblNameTwo.BackColor = lblNameOne.BackColor = Color.Black;
         }
 
         /// <summary>
@@ -108,12 +108,12 @@ namespace CapoeiraTimer.UI
                     _time = TimeSpan.FromSeconds( oConfig.TotalSeconds );
 
                     lblNameOne.Text = oConfig.PlayerOne.Item1;
-                    lblNameOne.ForeColor = oConfig.PlayerOne.Item2;
+                    lblNameOne.BackColor = oConfig.PlayerOne.Item2;
 
                     _playerOne = oConfig.PlayerOne;
 
                     lblNameTwo.Text = oConfig.PlayerTwo.Item1;
-                    lblNameTwo.ForeColor = oConfig.PlayerTwo.Item2;
+                    lblNameTwo.BackColor = oConfig.PlayerTwo.Item2;
 
                     _playerTwo = oConfig.PlayerTwo;
 

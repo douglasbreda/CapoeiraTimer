@@ -68,11 +68,11 @@ namespace CapoeiraTimer.UI
         {
             _duel.Player1 = _playerOne.Item1;
             btnPlayerOne.Text = $"{_duel.Player1} (1)";
-            btnPlayerOne.ForeColor = _playerOne.Item2;
+            btnPlayerOne.BackColor = _playerOne.Item2;
 
             _duel.Player2 = _playerTwo.Item1;
-            btnPlayerTwo.Text = $"{_duel.Player1} (2)";
-            btnPlayerTwo.ForeColor = _playerTwo.Item2;
+            btnPlayerTwo.Text = $"{_duel.Player2} (2)";
+            btnPlayerTwo.BackColor = _playerTwo.Item2;
         }
 
         /// <summary>
