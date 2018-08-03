@@ -5,3 +5,5 @@
 /bin/Debug
 /.vs/CapoeiraTimer/v15/Server/sqlite3
 /obj/Debug
+/.vs
+/obj/Release
