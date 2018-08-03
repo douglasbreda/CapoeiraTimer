@@ -56,6 +56,7 @@ namespace CapoeiraTimer.Class
         {
             return Path.GetDirectoryName( System.Reflection.Assembly.GetExecutingAssembly().Location );
         }
+
         #endregion
     }
 }
