@@ -114,7 +114,7 @@
             this.pnlConfirm.Location = new System.Drawing.Point(165, 0);
             this.pnlConfirm.Name = "pnlConfirm";
             this.pnlConfirm.Size = new System.Drawing.Size(108, 44);
-            this.pnlConfirm.TabIndex = 1;
+            this.pnlConfirm.TabIndex = 0;
             // 
             // btnConfirm
             // 
@@ -147,7 +147,7 @@
             this.pnlCancel.Name = "pnlCancel";
             this.pnlCancel.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.pnlCancel.Size = new System.Drawing.Size(108, 44);
-            this.pnlCancel.TabIndex = 0;
+            this.pnlCancel.TabIndex = 1;
             // 
             // btnCancel
             // 
